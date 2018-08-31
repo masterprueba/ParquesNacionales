@@ -29,9 +29,7 @@ public class ParqueService {
      
     private final static String[] states;
      
-    static {
-        
-         
+    static {        
         states = new String[3];
         states[0] = "Cauca";
         states[1] = "Magdalena";
@@ -40,10 +38,10 @@ public class ParqueService {
      
     public List<ParqueNatural> createParks() {
         Client client = ClientBuilder.newClient();
-        JsonArray jsonArray = null;
-        WebTarget rs = null;      
-        List<ParqueNatural> list = new ArrayList<ParqueNatural>();
-        rs = client.target("https://private-f57ba-parques5.apiary-mock.com/parks");
+        JsonArray jsonArray;
+        WebTarget rs;      
+        List<ParqueNatural> list = new ArrayList<>();
+        rs = client.target("https://private-anon-4f17d88ef6-parques5.apiary-mock.com/parks");
                     jsonArray = (JsonArray) rs.request(MediaType.APPLICATION_JSON).get(JsonArray.class);
         if (jsonArray != null) {
             Iterator iter = jsonArray.iterator();
@@ -62,7 +60,7 @@ public class ParqueService {
     
     public int editar(Entity payload, String id){
         Client client = ClientBuilder.newClient();
-        Response response = client.target("https://private-f57ba-parques5.apiary-mock.com/parks/{id}")
+        Response response = client.target("https://private-anon-4f17d88ef6-parques5.apiary-mock.com/parks/{id}")
             .resolveTemplate("id", id)
             .request(MediaType.APPLICATION_JSON_TYPE)
             .put(payload);
@@ -78,4 +76,12 @@ public class ParqueService {
         return response.getStatus();
         
     } 
+    
+    public int crear(Entity payload){
+        Client client = ClientBuilder.newClient();
+        Response response = client.target("https://private-anon-4f17d88ef6-parques5.apiary-mock.com/parks")
+            .request(MediaType.APPLICATION_JSON_TYPE)
+            .post(payload);
+        return response.getStatus();
+    }  
 }

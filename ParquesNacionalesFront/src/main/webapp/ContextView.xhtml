@@ -8,6 +8,7 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
             <ui:define name="content">
+                
                 <h:form id="formParques">
                     
                     <p:dataTable var="car" value="#{beanParque.parks}" widgetVar="parkTable"
@@ -57,7 +58,7 @@
                         <p:column  headerText="Action" >
                             <p:growl id="messages" />
                             <p:splitButton value="Seleccione" icon="ui-icon-extlink" >
-                                <p:menuitem value="Editar" outcome="EditParkView"   icon="ui-icon-arrowrefresh-1-w">
+                                <p:menuitem value="Editar" outcome="EditParkView"  icon="ui-icon-arrowrefresh-1-w" rendered="#{car.id.length()>0}">
                                     <f:param name="idpark" value="#{car.id}" /> 
                                 </p:menuitem>
                                 <p:separator />

@@ -38,8 +38,7 @@ public class ParqueInfo implements Serializable{
     @PostConstruct
     public void init() {
       FacesContext fc = FacesContext.getCurrentInstance();
-      Map<String,String> params = 
-      fc.getExternalContext().getRequestParameterMap();
+      Map<String,String> params = fc.getExternalContext().getRequestParameterMap();
       selectedId =  params.get("idpark"); 
       Client client = ClientBuilder.newClient();
         WebTarget rs = client.target("https://private-f57ba-parques5.apiary-mock.com/parks/{id}");
@@ -57,8 +56,6 @@ public class ParqueInfo implements Serializable{
         this.parque = parque;
     }
     
-    
-
     public String getSelectedId() {
 
         return selectedId;
@@ -76,9 +73,17 @@ public class ParqueInfo implements Serializable{
         this.selectedParque = selectedParque;
     }
 
-    public void editarPark(ActionEvent actionEvent){        
-        parque.editar(selectedParque);
-        parque.addMessage("Supuestamente edito con estado 204", FacesMessage.SEVERITY_INFO);
+    public void editarPark(ActionEvent actionEvent){ 
+        if(!selectedParque.getId().isEmpty()){
+            if(parque.editar(selectedParque) == 204){
+                parque.addMessage("Supuestamente edito con estado 204", FacesMessage.SEVERITY_INFO);
+            }else{
+                parque.addMessage("error editando...", FacesMessage.SEVERITY_INFO);
+            }
+        }else{
+           parque.addMessage("Erro no cargado en API", FacesMessage.SEVERITY_INFO); 
+        }
+        
     }
     
     

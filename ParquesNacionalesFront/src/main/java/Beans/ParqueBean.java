@@ -30,6 +30,7 @@ public class ParqueBean implements Serializable{
     private List<ParqueNatural> parques;
     private List<ParqueNatural> filteredParque;
     private String idPark;
+    private ParqueNatural parque;
     
     @ManagedProperty("#{parqueService}")
     private ParqueService service;
@@ -37,6 +38,7 @@ public class ParqueBean implements Serializable{
     @PostConstruct
     public void init() {
         parques = service.createParks();
+        parque = new ParqueNatural();
     }
 
     public String getIdPark() {
@@ -46,8 +48,14 @@ public class ParqueBean implements Serializable{
     public void setIdPark(String idPark) {
         this.idPark = idPark;
     }
-    
-    
+
+    public ParqueNatural getParque() {
+        return parque;
+    }
+
+    public void setParque(ParqueNatural parque) {
+        this.parque = parque;
+    }
     
     public List<String> getStates() {
         return service.getstate();
@@ -69,26 +77,43 @@ public class ParqueBean implements Serializable{
         this.service = service;
     }
     
-    public void editar(ParqueNatural parque){        
-        Entity payload = parque.toJson();        
-        service.editar(payload, parque.getId());                
+    public int editar(ParqueNatural parque){       
+            Entity payload = parque.toJson();        
+            return service.editar(payload, parque.getId());
+                        
     }
     public void addMessage(String summary, Severity mes) {
         FacesMessage message = new FacesMessage(mes, summary,  null);
         FacesContext.getCurrentInstance().addMessage(null, message);
     }       
     
-    public void delete(ParqueNatural parque) {            
-        int estado = service.Eliminar(parque.getId());
-        if (estado == 204) {
-            parques.remove(parque);
-            addMessage("Eliminado : "+parque.getName(),FacesMessage.SEVERITY_INFO);
+    public void delete(ParqueNatural parque) { 
+        if (parque != null) {
+            int estado = service.Eliminar(parque.getId());
+            if (estado == 204) {
+                parques.remove(parque);
+                addMessage("Eliminado : "+parque.getName(),FacesMessage.SEVERITY_INFO);
+            }else{
+                addMessage("Error eliminando : "+parque.getName(),FacesMessage.SEVERITY_ERROR);
+            }
         }else{
-            addMessage("Errror eliminando : "+parque.getName(),FacesMessage.SEVERITY_ERROR);
+            addMessage("Error objecto no cargado en la API",FacesMessage.SEVERITY_ERROR);
         }
+        
         
     }
     
-    
+    public void crear(){
+           Entity payload = parque.toJsonCrear();        
+            int estado = service.crear(payload);
+            if (estado == 201) {
+                parque.setStatus("Open");
+                parques.add(parque);
+                addMessage("Creado : "+parque.getName(),FacesMessage.SEVERITY_INFO);
+            }else{
+                addMessage("Error creando : "+parque.getName()+" "+estado,FacesMessage.SEVERITY_ERROR);
+            } 
+        
+    }
     
 }

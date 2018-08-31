@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="./css/default.css"/>
+        <h:outputStylesheet name="./css/cssLayout.css"/>
+        <title>Facelets Template</title>
+    </h:head>
+
+    <h:body>
+
+        <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    <div id="top">
+                        <h:form>
+                            <div class="ui-g " >                        
+                                <div class="ui-g-10"><h3 align="center">PARQUES NACIONALES</h3></div>
+                                <div class="ui-g-2">
+                                    <p:outputLabel for="console" value="Lenguaje:" />
+                                    <p:selectOneMenu id="console"  style="width:125px" >
+                                        <f:selectItem itemLabel="Seleccione uno" itemValue="" />
+                                        <f:selectItem itemLabel="Español" itemValue="Español" />
+                                        <f:selectItem itemLabel="Ingles" itemValue="Ingles" />
+                                    </p:selectOneMenu>
+                                </div>                        
+                            </div>
+                        </h:form>                    
+                    </div>
+                        
+                </p:layoutUnit>
+        
+                <p:layoutUnit position="center">
+                    <div id="content" class="center_content">
+                        <ui:insert name="content"></ui:insert>
+                    </div>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
+                    <div id="bottom">
+                        <ui:insert name="bottom">
+                            <h3 align="center">Taller Breiner Castro y Yoimar Angulo</h3>
+                        </ui:insert>
+                    </div>
+                </p:layoutUnit>                
+
+                
+
+    </h:body>
+
+</html>

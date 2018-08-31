@@ -90,6 +90,12 @@ public class ParqueNatural implements Serializable{
         return payload;
     }
     
+    public Entity toJsonCrear(){
+        
+        Entity payload = Entity.json("{ 'name': "+getName()+",  'state': "+getState()+",  'capacity': "+getCapacity()+"}");
+        return payload;
+    }
+    
     public boolean getBoolState() {
         if(this.status.equals("Open")){
             return true;

@@ -8,10 +8,10 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
     <f:view contentType="text/html">
         <h:head>
-            <f:facet name="first">
-                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-                <title>PrimeFaces</title>
-            </f:facet>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <h:outputStylesheet name="./css/default.css"/>
+            <h:outputStylesheet name="./css/cssLayout.css"/>
+            <title>Facelets Template</title>
         </h:head>
 
         <h:body>
@@ -25,16 +25,35 @@
                                 <div class="ui-g-10"><h3 align="center">PARQUES NACIONALES</h3></div>
                                 <div class="ui-g-2">
                                     <p:outputLabel for="console" value="Lenguaje:" />
-                                    <p:selectOneMenu id="console"  style="width:125px" >
-                                        <f:selectItem itemLabel="Seleccione uno" itemValue="" />
-                                        <f:selectItem itemLabel="Español" itemValue="Español" />
-                                        <f:selectItem itemLabel="Ingles" itemValue="Ingles" />
+                                    <p:selectOneMenu id="console" style="width:125px" value="#{languajeTemplate.languaje}" valueChangeListener="#{languajeTemplate.onLangChange}" onchange="submit()" immediate="true">
+                                        <f:selectItem itemLabel="English" itemValue="en" />
+                                        <f:selectItem itemLabel="Español" itemValue="es" />
                                     </p:selectOneMenu>
                                 </div>                        
                             </div>
                         </h:form>                    
                     </div>
-                        
+
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="175" header="Crear Nuevo" collapsible="true"  minSize="350">
+                    <h:form id="formguardar" enctype="application/x-www-from-urlencoded">
+                        <p:growl id="growl" life="2000" />                        
+                        <h:panelGrid columns="2" cellspacing="5" >                            
+
+                            <h:outputLabel for="txtName" value="Name"></h:outputLabel>
+                            <p:inputText id="txtName" rendered="true" value="#{beanParque.parque.name}" ></p:inputText>
+
+                            <h:outputLabel for="txtState" value="State"></h:outputLabel>
+                            <p:inputText id="txtColor" rendered="true" value="#{beanParque.parque.state}" ></p:inputText>
+
+                            <h:outputLabel for="txtCapacity" value="Capcity"></h:outputLabel>
+                            <p:inputText id="txtDt" rendered="true" value="#{beanParque.parque.capacity}" ></p:inputText>                            
+
+                            <p:commandButton update="formParques" value="Guardar" id="ajax" actionListener="#{beanParque.crear}" styleClass="ui-priority-primary" />                     
+
+                        </h:panelGrid>
+                    </h:form>
                 </p:layoutUnit>
 
                 <p:layoutUnit position="south" size="100" closable="true" collapsible="true">

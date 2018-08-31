@@ -5,8 +5,8 @@
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
     <application>
         <locale-config>
-            <default-locale>en</default-locale>
-            <supported-locale>es</supported-locale>
+            <default-locale>es</default-locale>
+            <supported-locale>en</supported-locale>
         </locale-config>
         <resource-bundle>
             <base-name>co.com.iteria.parques.bundle.ParqueNacional</base-name>
