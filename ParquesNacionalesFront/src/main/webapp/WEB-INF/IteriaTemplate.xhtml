@@ -11,7 +11,7 @@
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
             <h:outputStylesheet name="./css/default.css"/>
             <h:outputStylesheet name="./css/cssLayout.css"/>
-            <title>Facelets Template</title>
+            <title>#{tittle}</title>
         </h:head>
 
         <h:body>
@@ -22,12 +22,15 @@
                     <div id="top">
                         <h:form>
                             <div class="ui-g " >                        
-                                <div class="ui-g-10"><h3 align="center">PARQUES NACIONALES</h3></div>
+                                <div class="ui-g-10"><h3 align="center">#{bundle.TITULO}</h3></div>
                                 <div class="ui-g-2">
-                                    <p:outputLabel for="console" value="Lenguaje:" />
-                                    <p:selectOneMenu id="console" style="width:125px" value="#{languajeTemplate.languaje}" valueChangeListener="#{languajeTemplate.onLangChange}" onchange="submit()" immediate="true">
-                                        <f:selectItem itemLabel="English" itemValue="en" />
-                                        <f:selectItem itemLabel="Español" itemValue="es" />
+                                    <p:outputLabel for="console" value="#{bundle.LENGUAJE}  " />
+                                    <p:selectOneMenu id="console" style="width:125px" value="#{languajeTemplate.languaje}" 
+                                                     valueChangeListener="#{languajeTemplate.onLangChange}" 
+                                                     onchange="submit()" 
+                                                     immediate="true">
+                                        <f:selectItem itemLabel="#{bundle.LENGUAJE_ESPAÑOL}" itemValue="es" />
+                                        <f:selectItem itemLabel="#{bundle.LENGUAJE_INGLES}" itemValue="en" />
                                     </p:selectOneMenu>
                                 </div>                        
                             </div>
@@ -36,21 +39,21 @@
 
                 </p:layoutUnit>
 
-                <p:layoutUnit position="west" size="175" header="Crear Nuevo" collapsible="true"  minSize="350">
+                <p:layoutUnit position="west" size="175" header="#{bundle.TITULO_CREAR}" collapsible="true"  minSize="350">
                     <h:form id="formguardar" enctype="application/x-www-from-urlencoded">
                         <p:growl id="growl" life="2000" />                        
                         <h:panelGrid columns="2" cellspacing="5" >                            
 
-                            <h:outputLabel for="txtName" value="Name"></h:outputLabel>
+                            <h:outputLabel for="txtName" value="#{bundle.CREAR_NOMBRE}"></h:outputLabel>
                             <p:inputText id="txtName" rendered="true" value="#{beanParque.parque.name}" ></p:inputText>
 
-                            <h:outputLabel for="txtState" value="State"></h:outputLabel>
+                            <h:outputLabel for="txtState" value="#{bundle.CREAR_ESTADO}"></h:outputLabel>
                             <p:inputText id="txtColor" rendered="true" value="#{beanParque.parque.state}" ></p:inputText>
 
-                            <h:outputLabel for="txtCapacity" value="Capcity"></h:outputLabel>
+                            <h:outputLabel for="txtCapacity" value="#{bundle.CREAR_CAPACIDAD}"></h:outputLabel>
                             <p:inputText id="txtDt" rendered="true" value="#{beanParque.parque.capacity}" ></p:inputText>                            
 
-                            <p:commandButton update="formParques" value="Guardar" id="ajax" actionListener="#{beanParque.crear}" styleClass="ui-priority-primary" />                     
+                            <p:commandButton update="formParques" value="#{bundle.BTN_GUARDAR}" id="ajax" actionListener="#{beanParque.crear}" styleClass="ui-priority-primary" />                     
 
                         </h:panelGrid>
                     </h:form>
@@ -59,7 +62,7 @@
                 <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
                     <div id="bottom">
                         <ui:insert name="bottom">
-                            <h3 align="center">Taller Breiner Castro y Yoimar Angulo</h3>
+                            <h3 align="center">#{bundle.PIE_PAGINA}</h3>
                         </ui:insert>
                     </div>
                 </p:layoutUnit>                

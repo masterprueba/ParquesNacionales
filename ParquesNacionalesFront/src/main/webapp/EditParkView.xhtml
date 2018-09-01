@@ -2,10 +2,11 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
         <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                template="./WEB-INF/IteriaTemplate2.xhtml"
+                template="./WEB-INF/IteriaTemplateEdit.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
+            <ui:param name="tittle" value="#{bundle.TITULO_EDITAR}" ></ui:param>
             <f:metadata>
                 <f:viewParam name="idpark" value="#{parqueInfo.selectedId}" />
                 <f:viewAction action="#{parqueInfo.init()}" />
@@ -13,24 +14,24 @@
             <ui:define name="content">
                 <h:form id="formeditar" enctype="application/x-www-from-urlencoded">
                     <p:growl id="growl" life="2000" />
-                    <h:link outcome="ContextView" value="Atras" />
+                    <h:link outcome="ContextView" value="#{bundle.BTN_ATRAS}" />
                     <h:panelGrid columns="2" cellspacing="5" >
-                        <h:outputLabel for="txtId" value="ID"></h:outputLabel>
+                        <h:outputLabel for="txtId" value="#{bundle.ID}"></h:outputLabel>
                         <p:inputText id="txtCode" rendered="true" value="#{parqueInfo.selectedParque.id}" disabled="true"></p:inputText>
 
-                        <h:outputLabel for="txtName" value="Name"></h:outputLabel>
+                        <h:outputLabel for="txtName" value="#{bundle.CREAR_NOMBRE}"></h:outputLabel>
                         <p:inputText id="txtName" rendered="true" value="#{parqueInfo.selectedParque.name}" ></p:inputText>
 
-                        <h:outputLabel for="txtState" value="State"></h:outputLabel>
+                        <h:outputLabel for="txtState" value="#{bundle.CREAR_ESTADO}"></h:outputLabel>
                         <p:inputText id="txtColor" rendered="true" value="#{parqueInfo.selectedParque.state}" ></p:inputText>
 
-                        <h:outputLabel for="txtCapacity" value="Capcity"></h:outputLabel>
+                        <h:outputLabel for="txtCapacity" value="#{bundle.CREAR_CAPACIDAD}"></h:outputLabel>
                         <p:inputText id="txtDt" rendered="true" value="#{parqueInfo.selectedParque.capacity}" ></p:inputText>
 
-                        <h:outputLabel for="txtStatus" value="Status"></h:outputLabel>
+                        <h:outputLabel for="txtStatus" value="#{bundle.LABEL_ESTADOS}"></h:outputLabel>
                         <p:inputText id="txtfecha" rendered="true" value="#{parqueInfo.selectedParque.status}" ></p:inputText>
 
-                        <p:commandButton value="Editar" id="ajax" update="growl" actionListener="#{parqueInfo.editarPark}" styleClass="ui-priority-primary" />                     
+                        <p:commandButton value="#{bundle.TITULO_EDITAR}" id="ajax" update="growl" actionListener="#{parqueInfo.editarPark}" styleClass="ui-priority-primary" />                     
                         
                     </h:panelGrid>
                 </h:form>  
